@@ -22,6 +22,7 @@ namespace Biblioteca.Models
                 Livro livro = bc.Livros.Find(l.Id);
                 livro.Autor = l.Autor;
                 livro.Titulo = l.Titulo;
+                livro.Ano = l.Ano; 
 
                 bc.SaveChanges();
             }
@@ -66,8 +67,8 @@ namespace Biblioteca.Models
         {
             using(BibliotecaContext bc = new BibliotecaContext())
             {
-                //busca os livros onde o id não está entre os ids de livro em empréstimo
-                // utiliza uma subconsulta
+                // Faz uma subconsulta e busca os livros onde o id não está entre os ids de livros emprestados
+                
                 return
                     bc.Livros
                     .Where(l =>  !(bc.Emprestimos.Where(e => e.Devolvido == false).Select(e => e.LivroId).Contains(l.Id)) )

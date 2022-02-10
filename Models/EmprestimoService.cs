@@ -4,11 +4,11 @@ using Microsoft.EntityFrameworkCore;
 
 namespace Biblioteca.Models
 {
-    public class EmprestimoService 
+    public class EmprestimoService
     {
         public void Inserir(Emprestimo e)
         {
-            using(BibliotecaContext bc = new BibliotecaContext())
+            using (BibliotecaContext bc = new BibliotecaContext())
             {
                 bc.Emprestimos.Add(e);
                 bc.SaveChanges();
@@ -17,7 +17,7 @@ namespace Biblioteca.Models
 
         public void Atualizar(Emprestimo e)
         {
-            using(BibliotecaContext bc = new BibliotecaContext())
+            using (BibliotecaContext bc = new BibliotecaContext())
             {
                 Emprestimo emprestimo = bc.Emprestimos.Find(e.Id);
                 emprestimo.NomeUsuario = e.NomeUsuario;
@@ -25,6 +25,7 @@ namespace Biblioteca.Models
                 emprestimo.LivroId = e.LivroId;
                 emprestimo.DataEmprestimo = e.DataEmprestimo;
                 emprestimo.DataDevolucao = e.DataDevolucao;
+                emprestimo.Devolvido = e.Devolvido;
 
                 bc.SaveChanges();
             }
@@ -32,15 +33,58 @@ namespace Biblioteca.Models
 
         public ICollection<Emprestimo> ListarTodos(FiltrosEmprestimos filtro)
         {
-            using(BibliotecaContext bc = new BibliotecaContext())
+            using (BibliotecaContext bc = new BibliotecaContext())
             {
-                return bc.Emprestimos.Include(e => e.Livro).ToList();
+                IQueryable<Emprestimo> query;
+
+                query = bc.Emprestimos.Include(e => e.Livro);
+
+                if (filtro != null)
+                {
+                    //definindo dinamicamente a filtragem
+                    switch (filtro.TipoFiltro)
+                    {
+                        case "Usuario":
+
+                            query = bc.Emprestimos.Include(e => e.Livro).Where(e => e.NomeUsuario.Contains(filtro.Filtro));
+
+                            break;
+
+                        case "Livro":
+
+                            List<Livro> LivrosFiltrados = bc.Livros.Where(l => l.Titulo.Contains(filtro.Filtro)).ToList();
+
+                            List<int> LivrosIds = new List<int>();
+                            for (int i = 0; i < LivrosFiltrados.Count; i++)
+                            {
+                                LivrosIds.Add(LivrosFiltrados[i].Id);
+
+                            }
+
+                            query = bc.Emprestimos.Where(e => LivrosIds.Contains(e.LivroId));
+
+                            break;
+
+                        default:
+                            query = bc.Emprestimos;
+                            break;
+                    }
+                }
+                else
+                {
+                    query = bc.Emprestimos.Include(e => e.Livro);
+                }
+
+                return query.OrderBy(e => e.DataDevolucao).ToList();
+
+                //return bc.Emprestimos.Include(e => e.Livro).ToList(); -> Lista os emprestimos na ordem que foi cadastrados
+                //return bc.Emprestimos.Include(e => e.Livro).OrderBy(e => e.DataDevolucao).ToList(); //Lista os emprestimos por data de devolução 
             }
         }
 
         public Emprestimo ObterPorId(int id)
         {
-            using(BibliotecaContext bc = new BibliotecaContext())
+            using (BibliotecaContext bc = new BibliotecaContext())
             {
                 return bc.Emprestimos.Find(id);
             }
