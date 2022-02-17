@@ -14432,6 +14432,11 @@
       "FileKind": "mvc"
     },
     {
+      "FilePath": "c:\\Users\\Pessoal\\Desktop\\Tec Informatica\\UC07\\Biblioteca - netcore3.1\\Biblioteca\\Views\\Usuario\\RegistrarUsuarios.cshtml",
+      "TargetPath": "Views\\Usuario\\RegistrarUsuarios.cshtml",
+      "FileKind": "mvc"
+    },
+    {
       "FilePath": "c:\\Users\\Pessoal\\Desktop\\Tec Informatica\\UC07\\Biblioteca - netcore3.1\\Biblioteca\\Views\\Emprestimo\\Edicao.cshtml",
       "TargetPath": "Views\\Emprestimo\\Edicao.cshtml",
       "FileKind": "mvc"
@@ -14457,8 +14462,23 @@
       "FileKind": "mvc"
     },
     {
+      "FilePath": "c:\\Users\\Pessoal\\Desktop\\Tec Informatica\\UC07\\Biblioteca - netcore3.1\\Biblioteca\\Views\\Usuario\\NeedAdmin.cshtml",
+      "TargetPath": "Views\\Usuario\\NeedAdmin.cshtml",
+      "FileKind": "mvc"
+    },
+    {
       "FilePath": "c:\\Users\\Pessoal\\Desktop\\Tec Informatica\\UC07\\Biblioteca - netcore3.1\\Biblioteca\\Views\\Livro\\_FormCadastro.cshtml",
       "TargetPath": "Views\\Livro\\_FormCadastro.cshtml",
+      "FileKind": "mvc"
+    },
+    {
+      "FilePath": "c:\\Users\\Pessoal\\Desktop\\Tec Informatica\\UC07\\Biblioteca - netcore3.1\\Biblioteca\\Views\\Usuario\\EditarUsuario.cshtml",
+      "TargetPath": "Views\\Usuario\\EditarUsuario.cshtml",
+      "FileKind": "mvc"
+    },
+    {
+      "FilePath": "c:\\Users\\Pessoal\\Desktop\\Tec Informatica\\UC07\\Biblioteca - netcore3.1\\Biblioteca\\Views\\Usuario\\ListaDeUsuarios.cshtml",
+      "TargetPath": "Views\\Usuario\\ListaDeUsuarios.cshtml",
       "FileKind": "mvc"
     },
     {

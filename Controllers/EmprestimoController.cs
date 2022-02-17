@@ -15,9 +15,10 @@ namespace Biblioteca.Controllers
 
             LivroService livroService = new LivroService();
             EmprestimoService emprestimoService = new EmprestimoService();
+
             CadEmprestimoViewModel cadModel = new CadEmprestimoViewModel();
-            //cadModel.Livros = livroService.ListarTodos();
-            cadModel.Livros = livroService.ListarDisponiveis();
+            cadModel.Livros = livroService.ListarTodos();
+            //cadModel.Livros = livroService.ListarDisponiveis();
             return View(cadModel);
         }
 
@@ -40,6 +41,7 @@ namespace Biblioteca.Controllers
        public IActionResult Listagem(string tipoFiltro, string filtro, string itensPorPagina, int NumDaPagina, int PaginaAtual)
         {
             Autenticacao.CheckLogin(this);
+            
             FiltrosEmprestimos objFiltro = null;
             if(!string.IsNullOrEmpty(filtro))
             {
