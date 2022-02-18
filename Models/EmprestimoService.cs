@@ -76,9 +76,6 @@ namespace Biblioteca.Models
                 }
 
                 return query.OrderBy(e => e.DataDevolucao).ToList();
-
-                //return bc.Emprestimos.Include(e => e.Livro).ToList(); -> Lista os emprestimos na ordem que foi cadastrados
-                //return bc.Emprestimos.Include(e => e.Livro).OrderBy(e => e.DataDevolucao).ToList(); //Lista os emprestimos por data de devolução 
             }
         }
 
